@@ -13,10 +13,15 @@
             cursor: pointer;
         }
     </style>
-
     <div class="topbar shadow">
-        <div class="row m-0 p-0">
-            <div class="col-md-4 menu-o"><i class='bx bx-menu'></i></div>
+        <div style="display: flex;">
+            <div class="menu-o" style="flex-grow: 1;">
+                <i class='bx bx-menu'></i>
+            </div>
+            <div style="flex-grow: 2;text-align: center;">
+                <b style="font-size: 18px;">{{config('app.name')}}</b>
+            </div>
+            <div style="flex-grow: 1;text-align: right;">flag</div>
         </div>
     </div>
     <script>

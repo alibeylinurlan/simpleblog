@@ -36,6 +36,14 @@
         .catagory i {
             font-size: 28px;
         }
+        .menu-text {
+            position: absolute;
+            margin-left: 30px;
+            margin-top: -28px;
+            width: 75%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
         .logo {
             padding: 10px;
             font-size: 28px;
@@ -54,28 +62,29 @@
     <div id="menu">
         <div class="logo">
             <div class="logo-text">
-                Simple Blog
+                {{config('app.name')}}
             </div>
         </div>
         <div class="catagory" id="searchbox2">
-            <i class='bx bx-search-alt'></i>Search
+            <i class='bx bx-search-alt'></i><div class="menu-text">Search</div>
         </div>
         {{--        <a href="{{ route('instazoom') }}">--}}
         <a href="https://instazoomer.de/tr">
             <div class="catagory">
-                <i class='bx bxl-instagram'></i> İnstagram profil resmi büyüt
+                <i class='bx bxl-instagram'></i><div class="menu-text">Instagram</div>
             </div>
         </a>
         <a href="https://webpostegro.com/login">
             <div class="catagory">
-                <i class='bx bx-hide' ></i> Online postegro
+                <i class='bx bx-envelope'></i><div class="menu-text">Contact</div>
             </div>
         </a>
         <a href="https://webpostegro.com/login">
             <div class="catagory">
-                <i class='bx bxl-instagram-alt'></i> İnstagram gizli profillere bak
+                <i class='bx bx-phone-call'></i><div class="menu-text">Call us</div>
             </div>
         </a>
+        
     </div>
     <script>
         $(document).ready(function () {
