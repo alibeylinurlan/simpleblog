@@ -29,6 +29,8 @@ Route::middleware([
 
 //For guess
 
+
+
 //After logined
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     $c = 'App\Http\Controllers\\';
