@@ -1,0 +1,16 @@
+body {
+    font-family: 'Nunito', sans-serif !important;
+    background: #f8fafc !important;
+    margin: 0;
+    padding: 0;
+}
+.mytable {
+    width: 100%;
+}
+
+.perfect-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
