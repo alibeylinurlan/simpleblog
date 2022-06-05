@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OtherLink;
 use App\Models\Photo;
 use App\Models\Item;
+use App\Models\Text;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,41 +25,62 @@ class Crud extends Controller
 
     public function add(Request $r)
     {
+        $r->validate([
+            'header_photo_link' => 'required|unique:items|max:254',
+            'photo_links' => 'max:254',
+            'video_links' => 'max:254',
+        ]);
+
         DB::transaction(function () use($r) {
             $item = new Item;
             $item->header = $r->header;
             $item->slogan = $r->slogan;
-            $item->body = $r->body;
+            $item->header_photo_link = $r->header_photo_link;
             $item->category = $r->newcategory == null ? $r->category : $r->newcategory;
-            $item->reference_link = $r->reference_link;
             $item->save();
 
-            foreach ($r->foto_link as $foto_link)
+            if (isset($r->photo_links))
             {
-                $image = new Photo;
-                $image->item_id = $item->id;
-                $image->foto_link = $foto_link;
-                $image->save();
+                foreach ($r->photo_links as $photo_link) {
+                    $image = new Photo;
+                    $image->item_id = $item->id;
+                    $image->photo_link = $photo_link;
+                    $image->save();
+                }
             }
-            if (isset($r->video_link))
+            if (isset($r->video_links))
             {
-                foreach ($r->video_link as $video_link)
+                foreach ($r->video_links as $video_link)
                 {
-                    $video = new Photo;
+                    $video = new Video;
                     $video->item_id = $item->id;
                     $video->video_link = $video_link;
                     $video->save();
                 }
             }
+            if (isset($r->texts))
+            {
+                foreach ($r->texts as $text)
+                {
+                    $video = new Text;
+                    $video->item_id = $item->id;
+                    $video->text = $text;
+                    $video->save();
+                }
+            }
         });
-        return redirect()->route('index');
+        return redirect()
+            ->route('index')
+            ->with('success', 'Item added successfully!');
     }
 
     public function edit(Request $r)
     {
         $item = Item::find($r->id);
-        $foto_links = $item->photos->whereNotNull('foto_link')->pluck('foto_link')->toArray();
-        $video_links = $item->photos->whereNotNull('video_link')->pluck('video_link')->toArray();
+        $photo_links = $item->photos->whereNotNull('photo_link')->pluck('photo_link')->toArray() ?? [];
+        $video_links = $item->videos->whereNotNull('video_link')->pluck('video_link')->toArray() ?? [];
+        $texts = $item->texts->whereNotNull('text')->pluck('text')->toArray() ?? [];
+        $other_links = $item->otherlinks->whereNotNull('link')->pluck('link')->toArray() ?? [];
 
         $categories = Item::query()
             ->whereNotNull('category')
@@ -68,8 +92,11 @@ class Crud extends Controller
             compact(
             'item',
             'categories',
-            'foto_links',
-                'video_links'
+            'photo_links',
+                'video_links',
+                'texts',
+                'other_links'
+
             )
         );
     }
@@ -77,46 +104,69 @@ class Crud extends Controller
 
     public function uptade(Request $r)
     {
-
         DB::transaction(function () use($r) {
-            $photos = Photo::where('item_id', $r->id)->delete();
             $old_item = Item::find($r->id)->delete();
 
             $item = new Item;
             $item->header = $r->header;
             $item->slogan = $r->slogan;
-            $item->body = $r->body;
+            $item->header_photo_link = $r->header_photo_link;
             $item->category = $r->newcategory == null ? $r->category : $r->newcategory;
-            $item->reference_link = $r->reference_link;
             $item->save();
 
-            foreach ($r->foto_link as $foto_link)
+            if (isset($r->photo_links))
             {
-                $image = new Photo;
-                $image->item_id = $item->id;
-                $image->foto_link = $foto_link;
-                $image->save();
+                foreach ($r->photo_links as $photo_link) {
+                    $image = new Photo;
+                    $image->item_id = $item->id;
+                    $image->photo_link = $photo_link;
+                    $image->save();
+                }
             }
-            if (isset($r->video_link))
+            if (isset($r->video_links))
             {
-                foreach ($r->video_link as $video_link)
+                foreach ($r->video_links as $video_link)
                 {
-                    $video = new Photo;
+                    $video = new Video;
                     $video->item_id = $item->id;
                     $video->video_link = $video_link;
                     $video->save();
                 }
             }
+            if (isset($r->texts))
+            {
+                foreach ($r->texts as $text)
+                {
+                    $video = new Text;
+                    $video->item_id = $item->id;
+                    $video->text = $text;
+                    $video->save();
+                }
+            }
+            if (isset($r->other_links))
+            {
+                foreach ($r->other_links as $other_link)
+                {
+                    $video = new OtherLink;
+                    $video->item_id = $item->id;
+                    $video->link = $other_link;
+                    $video->save();
+                }
+            }
         });
-        return redirect()->route('index');
+        return redirect()
+            ->route('index')
+            ->with('success', 'Item upteded successfully!');
     }
 
     public function delete(Request $r)
     {
-        DB::transaction(function () use($r) {
-            $photos = Photo::where('item_id', $r->id)->delete();
-            $old_item = Item::find($r->id)->delete();
-        });
-        return redirect()->route('index');
+//        DB::transaction(function () use($r) {
+//            $item = Item::find($r->id)->delete();
+//            //all child with delete migration cascade
+//        });
+        return redirect()
+            ->route('index')
+            ->with('success', 'Item and its children deleted successfully!');;
     }
 }

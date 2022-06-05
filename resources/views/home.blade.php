@@ -34,6 +34,7 @@
         @yield('dashboard')
 
         <script src="{{ asset('js/loader.js') }}"></script>
+        <x-toastr />
         @livewireScripts
     </body>
 </html>

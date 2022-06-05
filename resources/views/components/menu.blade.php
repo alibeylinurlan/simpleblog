@@ -70,18 +70,22 @@
         <div class="catagory" id="searchbox2">
             <i class='bx bx-search-alt'></i><div class="menu-text">Search</div>
         </div>
-        {{--        <a href="{{ route('instazoom') }}">--}}
-        <a href="https://instazoomer.de/tr">
+        <a href="https://www.instagram.com/bilgitoplusu">
             <div class="catagory">
                 <i class='bx bxl-instagram'></i><div class="menu-text">Instagram</div>
             </div>
         </a>
-        <a href="https://webpostegro.com/login">
+        <a href="https://www.facebook.com/bilgitoplusu/">
+            <div class="catagory">
+                <i class='bx bxl-facebook-circle'></i><div class="menu-text">Facebook</div>
+            </div>
+        </a>
+        <a href="">
             <div class="catagory">
                 <i class='bx bx-envelope'></i><div class="menu-text">Contact</div>
             </div>
         </a>
-        <a href="https://webpostegro.com/login">
+        <a href="">
             <div class="catagory">
                 <i class='bx bx-phone-call'></i><div class="menu-text">Call us</div>
             </div>
@@ -98,12 +102,13 @@
                     <i class='bx bxs-dashboard' ></i><div class="menu-text">Dashboard</div>
                 </div>
             </a>
-            <div class="catagory">
+            <div class="catagory exitt">
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
                     <button>
-                        <i class='bx bx-log-out' ></i>
+                        <i class='bx bx-log-out exit' ></i>
                     </button>
+                    <div style="margin-top: -27px;position:absolute;margin-left: 30px;">Logout</div>
                 </form>
             </div>
         @endauth
@@ -128,6 +133,10 @@
             $('#menu-x, .catagory').on('click', function(){
                 $('#menu').css({'margin-left' : '-250px', 'opacity' : '0'});
                 $('#menu, #menu-x').fadeOut();
+            });
+
+            $('.exitt').on('click', function(){
+                $(this).children('form').submit();
             });
         })
     </script>

@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('other_links', function (Blueprint $table) {
             $table->id();
-            $table->string('header');
-            $table->string('slogan')->nullable();
-            $table->string('header_photo_link')->nullable();
-            $table->string('category')->nullable();
-            $table->unsignedBigInteger('look_count')->default(0);
-            $table->enum('status', ['active', 'waiting'])->default('waiting');
+            $table->string('link')->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('item_id');
+            $table->foreign('item_id')
+                ->references('id')->on('items')
+                ->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('other_links');
     }
 };

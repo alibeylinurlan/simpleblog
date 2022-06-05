@@ -33,4 +33,9 @@ class Item extends Model
         return $this->hasMany('App\Models\Text', 'item_id', 'id');
     }
 
+    public function otherlinks()
+    {
+        return $this->hasMany('App\Models\OtherLink', 'item_id', 'id');
+    }
+
 }

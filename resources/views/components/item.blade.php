@@ -65,7 +65,7 @@
             <p class="header p-2">
                 <b>{{$item->header}}</b>
             </p>
-            <img src="{{$itemheader_photo}}" alt="{{$item->header}}">
+            <img src="{{$item->header_photo_link}}" alt="{{$item->header}}">
             <div class="slogan-div">
                 <div class="slogan">
                     {{$item->slogan}}

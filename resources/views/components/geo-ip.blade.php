@@ -6,7 +6,6 @@
         @endphp
     @else
         <img src="http://www.abflags.com/_flags/flags-of-the-world/{{$country_name}}%20flag/{{$country_name}}%20flag-S-anim.gif" alt="{{$country_name}}_flag">
-
-        {{--$country_code--}}
+{{--        <img src="http://www.abflags.com/_flags/flags-of-the-world/Ukraine%20flag/Ukraine%20flag-S-anim.gif" alt="{{$country_name}}_flag">--}}
     @endif
 </div>
