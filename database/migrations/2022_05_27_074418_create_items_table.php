@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('header');
-            $table->longText('body')->nullable();
+            $table->string('slogan')->nullable();
+            $table->string('header_photo_link')->nullable();
             $table->string('category')->nullable();
             $table->string('reference_link')->nullable();
             $table->unsignedBigInteger('look_count')->default(0);

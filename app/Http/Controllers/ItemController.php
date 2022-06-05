@@ -15,7 +15,11 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::orderByDesc('id')
+            ->paginate(3)
+            ->fragment('item');
+
+        return view('pages.index', compact('items'));
     }
 
     /**
@@ -23,9 +27,19 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function info($name, $id)
     {
-        //
+        $id = $id/53478;
+
+        $item = Item::find($id);
+        if ($item == null) {
+            return redirect()->route('index');
+        }
+
+        $similars = Item::query()->where('category', $item->category)->inRandomOrder()->limit(20)->get();
+        $similars = $similars->shuffle();
+
+        return view('pages.info', compact('item', 'similars'));
     }
 
     /**

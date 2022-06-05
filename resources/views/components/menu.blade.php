@@ -6,7 +6,7 @@
             background: #fff;
             width: 250px;
             height: 100vh;
-            z-index: 1;
+            z-index: 5;
             transition: 0.3s;
             margin-left: -260px;
             opacity: 0;
@@ -17,7 +17,7 @@
             width: 100%;
             height: 100vh;
             background: black;
-            z-index: 1;
+            z-index: 4;
             opacity: 0.5;
             display: none;
             transition: 0.1s;
@@ -60,11 +60,13 @@
     </style>
     <div id="menu-x"></div>
     <div id="menu">
-        <div class="logo">
-            <div class="logo-text">
-                {{config('app.name')}}
+        <a href="{{route('index')}}">
+            <div class="logo">
+                <div class="logo-text">
+                    {{config('app.name')}}
+                </div>
             </div>
-        </div>
+        </a>
         <div class="catagory" id="searchbox2">
             <i class='bx bx-search-alt'></i><div class="menu-text">Search</div>
         </div>
@@ -84,7 +86,28 @@
                 <i class='bx bx-phone-call'></i><div class="menu-text">Call us</div>
             </div>
         </a>
-        
+
+        @auth
+            <a href="user/profile">
+                <div class="catagory">
+                    <i class='bx bxs-user'></i><div class="menu-text">Profile</div>
+                </div>
+            </a>
+            <a href="dashboard">
+                <div class="catagory">
+                    <i class='bx bxs-dashboard' ></i><div class="menu-text">Dashboard</div>
+                </div>
+            </a>
+            <div class="catagory">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button>
+                        <i class='bx bx-log-out' ></i>
+                    </button>
+                </form>
+            </div>
+        @endauth
+
     </div>
     <script>
         $(document).ready(function () {
