@@ -83,7 +83,7 @@
                     <div style="display: flex;">
                         <select class="input-text" required style="flex-grow: 2;" name="category">
                             @forelse($categories as $k => $category)
-                                <option value="{{ $category }}" @if($item->$category == $category) selected @endif>{{ $category }}</option>
+                                <option value="{{ $category }}" @if($item->category == $category) selected @endif>{{ $category }}</option>
                             @empty
                                 <option disabled>write a new category please</option>
                             @endforelse

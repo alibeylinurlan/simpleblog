@@ -34,7 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     $c = 'App\Http\Controllers\\';
 
     Route::post('/add', [Crud::class, 'add'])->name('add');
-    Route::get('/edit', [Crud::class, 'edit'])->name('edit');
+    Route::get('/edit/{id}', [Crud::class, 'edit'])->name('edit');
     Route::get('/delete', [Crud::class, 'delete'])->name('delete');
     Route::post('/uptade', [Crud::class, 'uptade'])->name('uptade');
 

@@ -1,5 +1,5 @@
 @extends('../home')
-@section('index')
+@section('category')
     <style>
         .page-link {
             margin: 3px;
@@ -12,9 +12,7 @@
     </style>
     
     <div style="max-width: 800px;margin: auto;">
-        <br>
-        <x-categories />
-        <h2><span style="border-bottom: darkred solid thin;">New added</span> </h2>
+        <h1><span style="border-bottom: darkred solid thin;">New added</span> </h1>
     </div>
     @forelse($items as $k => $item)
         <x-item  :item="$item"/>

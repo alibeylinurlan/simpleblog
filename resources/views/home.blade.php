@@ -32,7 +32,8 @@
         @yield('index')
         @yield('edit')
         @yield('dashboard')
-
+        @yield('category')
+        
         <script src="{{ asset('js/loader.js') }}"></script>
         <x-toastr />
         @livewireScripts
