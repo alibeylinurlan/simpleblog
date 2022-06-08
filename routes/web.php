@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 //For guess
 Route::get('/', [ItemController::class, 'index'])->name('index');
-Route::get('/info', [ItemController::class, 'info'])->name('info');
+Route::get('/{name}/{id}', [ItemController::class, 'info'])->name('info');
 
 
 

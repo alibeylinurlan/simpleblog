@@ -29,17 +29,41 @@ class ItemController extends Controller
      */
     public function info($name, $id)
     {
-        $id = $id/53478;
+        $id = $id/4321;
 
         $item = Item::find($id);
         if ($item == null) {
             return redirect()->route('index');
         }
+        $datas = [];
+        foreach ($item->texts as $text)
+        {
+            $datas += [$text->order => $text->text];
+        }
+        foreach ($item->photos as $photo)
+        {
+            $datas += [$photo->order => $photo->photo_link.'--photo--'];
+        }
+        foreach ($item->videos as $video)
+        {
+            $datas += [$video->order => $video->video_link.'--photo--'];
+        }
+        foreach ($item->otherlinks as $otherlink)
+        {
+            $datas += [$otherlink->order => $otherlink->link.'--link--||||'.$otherlink->link_text];
+        }
 
-        $similars = Item::query()->where('category', $item->category)->inRandomOrder()->limit(20)->get();
+        ksort($datas);
+
+        $similars = Item::query()->where('category', $item->category)->inRandomOrder()->limit(7)->get();
         $similars = $similars->shuffle();
 
-        return view('pages.info', compact('item', 'similars'));
+        return view('pages.info',
+            compact(
+                'item',
+                'datas',
+                'similars'
+            ));
     }
 
     /**

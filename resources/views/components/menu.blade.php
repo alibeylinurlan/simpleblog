@@ -70,6 +70,11 @@
         <div class="catagory" id="searchbox2">
             <i class='bx bx-search-alt'></i><div class="menu-text">Search</div>
         </div>
+        <a href="#categories">
+            <div class="catagory">
+                <i class='bx bx-category'></i><div class="menu-text">Categories</div>
+            </div>
+        </a>
         <a href="https://www.instagram.com/bilgitoplusu">
             <div class="catagory">
                 <i class='bx bxl-instagram'></i><div class="menu-text">Instagram</div>
@@ -97,7 +102,7 @@
                     <i class='bx bxs-user'></i><div class="menu-text">Profile</div>
                 </div>
             </a>
-            <a href="dashboard">
+            <a href="{{ route('dashboard') }}">
                 <div class="catagory">
                     <i class='bx bxs-dashboard' ></i><div class="menu-text">Dashboard</div>
                 </div>

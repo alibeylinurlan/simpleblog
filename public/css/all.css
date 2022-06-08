@@ -3,6 +3,10 @@ body {
     background: #f8fafc !important;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+}
+html {
+    scroll-behavior: smooth;
 }
 .mytable {
     width: 100%;
@@ -13,4 +17,15 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+.topper {
+    border-bottom: darkred solid thin;
+    margin-left: 5px;
+    font-size: 22px;
+}
+.row {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.row div {
+    padding: 0 !important;
+}

@@ -1,9 +1,5 @@
 @extends('home')
 @section('dashboard')
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <style>
         .shadow {
             box-shadow: 0 0 5px gray;
@@ -56,7 +52,7 @@
             display: flex;
         }
         .ph_vd_txt input, .ph_vd_txt textarea {
-            width: 95%;
+            width: 85%;
         }
         textarea {
             margin-top: 10px;
@@ -93,8 +89,6 @@
                     </div>
                     <label class="input-label">Header foto link</label><br>
                     <input class="input-text" type="text" name="header_photo_link" required placeholder="Please write just image link">
-                    <label class="input-label">First text</label>
-                    <textarea style="margin-top: 0;" class="input-text" type="text" name="texts[]" required placeholder="Must be first text"></textarea>
                     <div class="depend-div">
                     </div>
                     <div class="mt-4">
@@ -124,41 +118,58 @@
     </div>
     <script>
         $(document).ready(function(){
+            var order = 0;
             $('.imagebtn').on('click', function (){
                $('.depend-div')
-                   .append('<div class="ph_vd_txt"><input class="input-text mt-4" type="text" name="photo_links[]" placeholder="Write image link" ><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
+                   .append('<div class="ph_vd_txt"><input class="input-text mt-4" type="text" name="photo_links[]" placeholder="Write image link" ><input type="hidden" name="photo_orders[]" value="'+order+'" /><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
                $('.ph_vd_txt:last-child').hide().slideDown();
                $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+                order++;
             });
 
             $('.videobtn').on('click', function (){
                 $('.depend-div')
-                    .append('<div class="ph_vd_txt"><input class="input-text mt-4" type="text" name="video_links[]" placeholder="Write google drive video link" ><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
+                    .append('<div class="ph_vd_txt"><input class="input-text mt-4" type="text" name="video_links[]" placeholder="Write google drive video link" ><input type="hidden" name="video_orders[]" value="'+order+'" /><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
                 $('.ph_vd_txt:last-child').hide().slideDown();
                 $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+                order++;
             });
 
             $('.textbtn').on('click', function (){
                 $('.depend-div')
-                    .append('<div class="ph_vd_txt"><textarea class="input-text" type="text" name="texts[]" placeholder="Write text"></textarea><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
+                    .append('<div class="ph_vd_txt"><textarea class="input-text" type="text" name="texts[]" placeholder="Write text"></textarea><input type="hidden" name="text_orders[]" value="'+order+'" /><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
                 $('.ph_vd_txt:last-child').hide().slideDown();
                 $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+                order++;
             });
 
             $('.otherlinkbtn').on('click', function (){
                 $('.depend-div')
-                    .append('<div class="ph_vd_txt"><input class="input-text mt-4" type="text" name="other_links[]" placeholder="Write other referance link" ><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
+                    .append('<div class="ph_vd_txt"><input style="width: 40%;" class="input-text mt-4" type="text" name="other_links[]" placeholder="Write other referance link" required><input style="width: 45%;" class="input-text mt-4" type="text" name="other_link_texts[]" placeholder="Write text for referance link" required ><input type="hidden" name="other_link_orders[]" value="'+order+'" /><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
                 $('.ph_vd_txt:last-child').hide().slideDown();
                 $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+                order++;
             });
 
             $('.depend-div').on('click', '.xx', function (){
                 $(this).parent().parent().slideUp(function() { $(this).remove(); });
+                order--;
             });
 
         });
     </script>
-
     <x-toastr />
+
+{{--    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>--}}
+{{--    <script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>--}}
+{{--    <script>--}}
+{{--        CKEDITOR.replace('txt0');--}}
+{{--        CKEDITOR.replace('txt1');--}}
+{{--        CKEDITOR.replace('txt2');--}}
+{{--        CKEDITOR.replace('txt3');--}}
+{{--        CKEDITOR.replace('txt4');--}}
+{{--        CKEDITOR.replace('txt5');--}}
+{{--        CKEDITOR.replace('txt6');--}}
+{{--    </script>--}}
 
 @endsection

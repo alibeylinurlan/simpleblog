@@ -1,5 +1,12 @@
 <div>
     <style type="text/css">
+        .catagories-div {
+            white-space: nowrap;
+            overflow: auto;
+            margin-top: 7px;
+            width: 100%;
+            scroll-behavior: smooth;
+        }
         .catagories {
             white-space: nowrap;
             width: 100%;
@@ -7,19 +14,21 @@
         }
         .catagories li {
             float: left;
-            font-size: 16px;
-            background: gray;
-            border-radius: 5px;
-            margin-right: 12px;
+            padding: 3px;
+            margin: 5px
+        }
+        .catagories li span {
             padding: 3px;
             padding-inline: 10px;
+            font-size: 16px;
+            background: #eee;
         }
     </style>
-    <div>
+    <div class="catagories-div">
         <ul class="catagories">
             @forelse($categories as $category)
-                <li class="shadow">
-                    {{ $category }}
+                <li>
+                    <span class="shadow">{{ $category }}</span>
                 </li>
             @empty
                 No category yet.

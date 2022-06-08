@@ -62,24 +62,29 @@
                     </a>
                 </div>
             @endauth
+            <div class="admin category">
+                <span class="text-emerald-400">{{ $item->category }}</span>
+            </div>
             <p class="header p-2">
                 <b>{{$item->header}}</b>
             </p>
-            <img src="{{$item->header_photo_link}}" alt="{{$item->header}}">
-            <div class="slogan-div">
-                <div class="slogan">
-                    {{$item->slogan}}
-                    {{$item->slogan}}
-                </div>
-                <div class="read-more">
-                    <div>
-                        <div>Open</div>
-                        <div class="arrow">
-                            <i class='bx bxs-chevron-right'></i>
+            <a href="{{ route('info', ['name' => urlencode($item->header), 'id' => $item->id*4321]) }}">
+                <img src="{{$item->header_photo_link}}" alt="{{$item->header}}">
+                <div class="slogan-div">
+                    <div class="slogan">
+                        {{$item->slogan}}
+                        {{$item->slogan}}
+                    </div>
+                    <div class="read-more">
+                        <div>
+                            <div>Open</div>
+                            <div class="arrow">
+                                <i class='bx bxs-chevron-right'></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
     </div>

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('other_links', function (Blueprint $table) {
             $table->id();
+            $table->string('link_text')->nullable();
             $table->string('link')->nullable();
             $table->timestamps();
 

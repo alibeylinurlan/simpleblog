@@ -10,11 +10,12 @@
             overflow: hidden;
         }
     </style>
-    
-    <div style="max-width: 800px;margin: auto;">
+
+    <div id="categories"  style="max-width: 800px;margin: auto;">
         <br>
+        <h2><span class="topper">Categories</span></h2>
         <x-categories />
-        <h2><span style="border-bottom: darkred solid thin;">New added</span> </h2>
+        <h2><span class="topper">New added</span></h2>
     </div>
     @forelse($items as $k => $item)
         <x-item  :item="$item"/>

@@ -26,7 +26,7 @@ class Crud extends Controller
     public function add(Request $r)
     {
         $r->validate([
-            'header_photo_link' => 'required|unique:items|max:254',
+            'header_photo_link' => 'required|max:254',
             'photo_links' => 'max:254',
             'video_links' => 'max:254',
         ]);
@@ -41,33 +41,51 @@ class Crud extends Controller
 
             if (isset($r->photo_links))
             {
-                foreach ($r->photo_links as $photo_link) {
-                    $image = new Photo;
-                    $image->item_id = $item->id;
-                    $image->photo_link = $photo_link;
-                    $image->save();
+                $photo_count = count($r->photo_links);
+                for ($i = 0; $i < $photo_count; $i++) {
+                    $photo = new Photo;
+                    $photo->item_id = $item->id;
+                    $photo->photo_link = $r->photo_links[$i];
+                    $photo->order = $r->photo_orders[$i];
+                    $photo->save();
                 }
             }
             if (isset($r->video_links))
             {
-                foreach ($r->video_links as $video_link)
-                {
+                $video_count = count($r->video_links);
+                for ($i = 0; $i < $video_count; $i++) {
                     $video = new Video;
                     $video->item_id = $item->id;
-                    $video->video_link = $video_link;
+                    $video->video_link = $r->video_links[$i];
+                    $video->order = $r->video_orders[$i];
                     $video->save();
                 }
             }
             if (isset($r->texts))
             {
-                foreach ($r->texts as $text)
-                {
-                    $video = new Text;
-                    $video->item_id = $item->id;
-                    $video->text = $text;
-                    $video->save();
+                $text_count = count($r->texts);
+                for ($i = 0; $i < $text_count; $i++) {
+                    $text = new Text;
+                    $text->item_id = $item->id;
+                    $text->text = $r->texts[$i];
+                    $text->order = $r->text_orders[$i];
+                    $text->save();
                 }
             }
+
+            if (isset($r->other_links))
+            {
+                $other_links_count = count($r->other_links);
+                for ($i = 0; $i < $other_links_count; $i++) {
+                    $other_link = new OtherLink;
+                    $other_link->item_id = $item->id;
+                    $other_link->link = $r->other_links[$i];
+                    $other_link->link_text = $r->other_link_texts[$i];
+                    $other_link->order = $r->other_link_orders[$i];
+                    $other_link->save();
+                }
+            }
+
         });
         return redirect()
             ->route('index')
@@ -116,41 +134,48 @@ class Crud extends Controller
 
             if (isset($r->photo_links))
             {
-                foreach ($r->photo_links as $photo_link) {
-                    $image = new Photo;
-                    $image->item_id = $item->id;
-                    $image->photo_link = $photo_link;
-                    $image->save();
+                $photo_count = count($r->photo_links);
+                for ($i = 0; $i < $photo_count; $i++) {
+                    $photo = new Photo;
+                    $photo->item_id = $item->id;
+                    $photo->photo_link = $r->photo_links[$i];
+                    $photo->order = $r->photo_orders[$i];
+                    $photo->save();
                 }
             }
             if (isset($r->video_links))
             {
-                foreach ($r->video_links as $video_link)
-                {
+                $video_count = count($r->video_links);
+                for ($i = 0; $i < $video_count; $i++) {
                     $video = new Video;
                     $video->item_id = $item->id;
-                    $video->video_link = $video_link;
+                    $video->video_link = $r->video_links[$i];
+                    $video->order = $r->video_orders[$i];
                     $video->save();
                 }
             }
             if (isset($r->texts))
             {
-                foreach ($r->texts as $text)
-                {
-                    $video = new Text;
-                    $video->item_id = $item->id;
-                    $video->text = $text;
-                    $video->save();
+                $text_count = count($r->texts);
+                for ($i = 0; $i < $text_count; $i++) {
+                    $text = new Text;
+                    $text->item_id = $item->id;
+                    $text->text = $r->texts[$i];
+                    $text->order = $r->text_orders[$i];
+                    $text->save();
                 }
             }
+
             if (isset($r->other_links))
             {
-                foreach ($r->other_links as $other_link)
-                {
-                    $video = new OtherLink;
-                    $video->item_id = $item->id;
-                    $video->link = $other_link;
-                    $video->save();
+                $other_links_count = count($r->other_links);
+                for ($i = 0; $i < $other_links_count; $i++) {
+                    $other_link = new OtherLink;
+                    $other_link->item_id = $item->id;
+                    $other_link->link = $r->other_links[$i];
+                    $other_link->link_text = $r->other_link_texts[$i];
+                    $other_link->order = $r->other_link_orders[$i];
+                    $other_link->save();
                 }
             }
         });
@@ -161,10 +186,10 @@ class Crud extends Controller
 
     public function delete(Request $r)
     {
-//        DB::transaction(function () use($r) {
-//            $item = Item::find($r->id)->delete();
-//            //all child with delete migration cascade
-//        });
+        DB::transaction(function () use($r) {
+            $item = Item::find($r->id)->delete();
+            //all child with delete migration cascade
+        });
         return redirect()
             ->route('index')
             ->with('success', 'Item and its children deleted successfully!');;
