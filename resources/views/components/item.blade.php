@@ -51,7 +51,7 @@
     </style>
     <div class="item-component-div">
 
-        <div class="item-component rounded-md shadow m-1">
+        <div class="item-component rounded-md shadow m-1 pt-3 ">
             @auth
                 <div class="admin">
                     <a href="{{ route('edit', ['id' => $item->id]) }}">
@@ -62,8 +62,8 @@
                     </a>
                 </div>
             @endauth
-            <div class="admin category">
-                <span class="text-emerald-400">{{ $item->category }}</span>
+            <div class="admin category" style="margin-top: -6px;margin-right: -6px;">
+                <span class="text-gray-500">{{ $item->category }}</span>
             </div>
             <p class="header p-2">
                 <b>{{$item->header}}</b>
@@ -72,7 +72,6 @@
                 <img src="{{$item->header_photo_link}}" alt="{{$item->header}}">
                 <div class="slogan-div">
                     <div class="slogan">
-                        {{$item->slogan}}
                         {{$item->slogan}}
                     </div>
                     <div class="read-more">

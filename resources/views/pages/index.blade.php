@@ -15,7 +15,9 @@
         <br>
         <h2><span class="topper">Categories</span></h2>
         <x-categories />
+        @if($_GET['page'] == 1 || $_GET['page'] == null)
         <h2><span class="topper">New added</span></h2>
+            @end
     </div>
     @forelse($items as $k => $item)
         <x-item  :item="$item"/>

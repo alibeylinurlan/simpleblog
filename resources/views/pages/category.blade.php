@@ -10,7 +10,7 @@
             overflow: hidden;
         }
     </style>
-    
+
     <div style="max-width: 800px;margin: auto;">
         <h1><span style="border-bottom: darkred solid thin;">New added</span> </h1>
     </div>
@@ -28,4 +28,5 @@
         {{ $items->links() }}
     </div>
     <br><br><br>
+
 @endsection
