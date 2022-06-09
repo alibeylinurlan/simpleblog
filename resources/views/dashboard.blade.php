@@ -158,7 +158,6 @@
 
         });
     </script>
-    <x-toastr />
 
 {{--    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>--}}
 {{--    <script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>--}}

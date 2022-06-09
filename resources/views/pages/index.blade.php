@@ -14,11 +14,14 @@
     <div id="categories"  style="max-width: 800px;margin: auto;">
         <br>
         <h2><span class="topper">Categories</span></h2>
-        <x-categories />
+        {{-- <x-categories /> --}}
+        @livewire('categories')
         <h2><span class="topper">New added</span></h2>
     </div>
     @forelse($items as $k => $item)
-        <x-item  :item="$item"/>
+        {{-- <x-item  :item="$item"/> --}}
+        <livewire:item :item="$item">
+        {{-- @livewire('item', ['item' => $item]) --}}
     @empty
         <br><br>
         <a href="dashboard">

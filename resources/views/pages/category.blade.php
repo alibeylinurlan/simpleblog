@@ -15,7 +15,9 @@
         <h1><span style="border-bottom: darkred solid thin;">New added</span> </h1>
     </div>
     @forelse($items as $k => $item)
-        <x-item  :item="$item"/>
+        {{-- <x-item  :item="$item"/> --}}
+        <livewire:item :item="$item">
+        {{-- @livewire('item', ['item' => $item]) --}}
     @empty
         <br><br>
         <a href="dashboard">

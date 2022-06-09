@@ -203,6 +203,4 @@
 
         });
     </script>
-
-    <x-toastr />
 @endsection

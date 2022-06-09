@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Simple Blog</title>
+        <title>{{config('app.name')}}</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Styles -->
@@ -26,8 +26,8 @@
         <div id="searchcomponent" style="width:100%;height: 100vh;background: #fff; position: fixed;z-index: 5;padding: 10px;display: none;">
             @livewire('search')
         </div>
-        <x-topbar />
-        <x-menu />
+        <livewire:topbar />
+        <livewire:menu />
 
         @yield('index')
         @yield('edit')
@@ -36,7 +36,7 @@
         @yield('category')
 
         <script src="{{ asset('js/loader.js') }}"></script>
-        <x-toastr />
+        <livewire:toastr />
         @livewireScripts
     </body>
 </html>

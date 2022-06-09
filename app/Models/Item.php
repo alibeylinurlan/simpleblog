@@ -14,10 +14,6 @@ class Item extends Model
         'updated_at',
     ];
 
-    protected $appends = [
-        'first_foto',
-    ];
-
     public function photos()
     {
         return $this->hasMany('App\Models\Photo', 'item_id', 'id');

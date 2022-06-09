@@ -120,6 +120,6 @@
     <div id="categories"  style="max-width: 800px;margin: auto;">
         <br>
         <h2><span class="topper">Other categories</span></h2>
-        <x-categories />
+        <livewire:categories />
     </div>
 @endsection

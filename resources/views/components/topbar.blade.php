@@ -28,7 +28,8 @@
             </div>
             <div style="flex-grow: 1;text-align: right;">
                 <div style="float:right;">
-                    <x-geo-ip />
+                    {{-- <x-geo-ip /> --}}
+                    <livewire:geo-ip />
                 </div>
             </div>
         </div>
