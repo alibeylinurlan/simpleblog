@@ -9,6 +9,7 @@ use App\Models\Text;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Crud extends Controller
 {
@@ -23,8 +24,16 @@ class Crud extends Controller
         return view('dashboard', compact('categories'));
     }
 
+    public function toStorefromUrl($url)
+    {
+        $contents = file_get_contents($url);
+        $name = rand(1,999).substr($url, strrpos($url, '/') + 1);
+        Storage::put('public/blog_images/'.$name, $contents);
+        return $name;
+    }
     public function add(Request $r)
     {
+
         $r->validate([
             'header_photo_link' => 'required|max:254',
             'photo_links' => 'max:254',
@@ -35,7 +44,13 @@ class Crud extends Controller
             $item = new Item;
             $item->header = $r->header;
             $item->slogan = $r->slogan;
-            $item->header_photo_link = $r->header_photo_link;
+            if ($r->headerphotosave == 1) {
+                $name = $this->toStorefromUrl($r->header_photo_link);
+                $item->header_photo_link = '/storage/blog_images/'.$name;
+            }
+            else {
+                $item->header_photo_link = $r->header_photo_link;
+            }
             $item->category = $r->newcategory == null ? $r->category : $r->newcategory;
             $item->save();
 
@@ -43,11 +58,20 @@ class Crud extends Controller
             {
                 $photo_count = count($r->photo_links);
                 for ($i = 0; $i < $photo_count; $i++) {
+
                     $photo = new Photo;
                     $photo->item_id = $item->id;
-                    $photo->photo_link = $r->photo_links[$i];
+                    if ($r->tosave[$i] == 1) 
+                    {
+                        $name = $this->toStorefromUrl($r->photo_links[$i]);
+                        $photo->photo_link = '/storage/blog_images/'.$name;                        
+                    }
+                    else {
+                        $photo->photo_link = $r->photo_links[$i];
+                    }
                     $photo->order = $r->photo_orders[$i];
                     $photo->save();
+                    
                 }
             }
             if (isset($r->video_links))

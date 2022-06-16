@@ -89,6 +89,7 @@
                     </div>
                     <label class="input-label">Header foto link</label><br>
                     <input class="input-text" type="text" name="header_photo_link" required placeholder="Please write just image link">
+                    save?<input type="checkbox" name="headerphotosave" value="1">
                     <div class="depend-div">
                     </div>
                     <div class="mt-4">
@@ -121,7 +122,7 @@
             var order = 0;
             $('.imagebtn').on('click', function (){
                $('.depend-div')
-                   .append('<div class="ph_vd_txt"><input class="input-text mt-4" type="text" name="photo_links[]" placeholder="Write image link" ><input type="hidden" name="photo_orders[]" value="'+order+'" /><div><div class="xx"><i class="bx bx-x"></i></div></div></div>');
+                   .append('<div class="ph_vd_txt"><input style="width: 75%;" class="input-text mt-4" type="text" name="photo_links[]" placeholder="Write image link" ><input type="hidden" name="photo_orders[]" value="'+order+'" /><div>save ?<input type="checkbox" name="tosave[]" value="1"><div class="xx" style="position: absolute;margin-left: 30px;margin-top:-30px;"><i class="bx bx-x"></i></div></div></div>');
                $('.ph_vd_txt:last-child').hide().slideDown();
                $("html, body").animate({ scrollTop: $(document).height() }, 1000);
                 order++;
